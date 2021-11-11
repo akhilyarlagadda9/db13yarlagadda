@@ -1,9 +1,8 @@
 var express = require('express');
+const player_controlers= require('../controllers/player');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('players', { title: 'Search Results Players' });
-});
+/* GET player */
 
+router.get('/', player_controlers.player_view_all_Page );
 module.exports = router;

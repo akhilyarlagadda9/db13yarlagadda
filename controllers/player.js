@@ -31,14 +31,37 @@ exports.player_create_post =async function(req, res) {
 }; 
  
 // Handle Player delete form on DELETE. 
-exports.player_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Player delete DELETE ' + req.params.id); 
+exports.player_delete = async function(req, res) { debugger
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Player.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
 }; 
- 
 // Handle Player update form on PUT. 
-exports.player_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Player update PUT' + req.params.id); 
+exports.player_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await Player.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.Player_name)  
+               toUpdate.Player_name = req.body.Player_name; 
+        if(req.body.Batting_style) toUpdate.Batting_style = req.body.Batting_style; 
+        if(req.body.Purchased_cost) toUpdate.Purchased_cost = req.body.Purchased_cost; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
 }; 
+
 
 // List of all Players
 exports.player_list = async function (req, res) {
@@ -65,3 +88,15 @@ exports.player_view_all_Page = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+// for a specific Player. 
+exports.player_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await Player.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
+}; 

@@ -16,4 +16,6 @@ router.get('/detail', player_controlers.player_view_one_Page);
 router.get('/create', player_controlers.player_create_Page);
 /* GET create update page */ 
 router.get('/update', player_controlers.player_update_Page); 
+/* GET create player page */ 
+router.get('/delete', player_controlers.player_delete_Page); 
 module.exports = router;

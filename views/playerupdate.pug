@@ -1,0 +1,43 @@
+extends layout 
+ 
+block content 
+  h1= title 
+
+  - let playerid = toShow._id 
+  - let Player_name = toShow.Player_name 
+  - let Batting_style = toShow.Batting_style 
+  - let Purchased_cost = toShow.Purchased_cost
+   
+  div.row(class='mb-2') 
+    div.mr-1 Player ID is 
+    div #{playerid} 
+  - let actionid = "/resource/player/" + playerid 
+  form(id='PlayerForm', action=actionid, method="PUT") 
+    div.form-group 
+        label.playerAttr(for='Player_name') Player Name 
+        input#Player_name(type='text', name='Player_name',value=Player_name) 
+    div.form-group 
+        label.playerAttr(for='Batting_style') Batting Style
+        input#Batting_style(type='text', name='Batting_style',value=Batting_style) 
+    div.form-group 
+        label.playerAttr(for='Purchased_cost') Player cost 
+        input#Purchased_cost(type='number', name='Purchased_cost',value=Purchased_cost) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['PlayerForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) //event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

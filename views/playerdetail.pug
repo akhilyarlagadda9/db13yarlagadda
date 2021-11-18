@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let playerid = toShow._id 
+  - let Player_name = toShow.Player_name 
+  - let Batting_style = toShow.Batting_style 
+  - let Purchased_cost = toShow.Purchased_cost 
+  div 
+    div.row 
+      div(class='playerAttr mr-3') Player ID is: 
+      div #{playerid} 
+    div.row 
+      div(class='playerAttr mr-3') Player Name is: 
+      div #{Player_name} 
+    div.row 
+      div(class='playerAttr mr-3') Batting Style is: 
+      div #{Batting_style} 
+    div.row 
+      div(class='playerAttr mr-3') Player Cost is: 
+      div #{Purchased_cost} 

@@ -12,5 +12,6 @@ router.get('/player/:id', player_controlers.player_detail);
 
 //GET detail player page */ 
 router.get('/detail', player_controlers.player_view_one_Page); 
-
+/* GET create player page */ 
+router.get('/create', player_controlers.player_create_Page);
 module.exports = router;

@@ -1,4 +1,4 @@
-extends layout 
+extends layout  
  
 block content 
   h1= title 
@@ -6,13 +6,13 @@ block content
   form(id='PlayerForm', action="/resource/player", method="POST") 
     div.form-group 
         label.playerAttr(for='Player_name') Player Name 
-        input#Player_name(type='text', name='Player_name') 
+        input#Player_name(type='text', name='Player_name', minlength="20", maxlength="50") 
     div.form-group 
         label.playerAttr(for='Batting_style') Batting Style
         input#Batting_style(type='text', name='Batting_style') 
     div.form-group 
         label.playerAttr(for='Purchased_cost') Player cost 
-        input#Purchased_cost(type='number', name='Purchased_cost') 
+        input#Purchased_cost(type='number', name='Purchased_cost', min="1000" , max="2000") 
     input(type="submit") 
  
   script. 

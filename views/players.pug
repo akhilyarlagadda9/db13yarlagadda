@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
   - let items = results; 
+   button.btn( class="btn btn-sm btn-info ml-1", onclick= `dispatch(\"/players/create\")` ) Create
   table(class="table table-stripped table-bordered")
         thead(style="background-color:lightgreen;color:white") 
             tr
@@ -11,6 +12,8 @@ block content
                 td Batting Style 
                 td Purchased Cost 
                 td Update
+                td Details 
+                td Delete
         tbody
             
             each item in items
@@ -22,6 +25,10 @@ block content
                     td #{item.Purchased_cost}
                     td 
                       button.btn( class="btn btn-sm btn-info ml-1", onclick= `dispatch(\"/players/update/?id=${item._id}\")` ) Update 
+                    td 
+                      button.btn( class="btn btn-sm btn-info ml-1", onclick= `dispatch(\"/players/detail/?id=${item._id}\")` ) Detail 
+                    td 
+                      button.btn( class="btn btn-sm btn-info ml-1", onclick= `dispatch(\"/players/delete/?id=${item._id}\")` ) Delete 
                 script. 
                   function dispatch(path){ 
                     window.location.href=path 

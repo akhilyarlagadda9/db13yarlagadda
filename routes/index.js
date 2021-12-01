@@ -2,7 +2,6 @@ var express = require('express');
 var passport = require('passport'); 
 var router = express.Router(); 
 var Account = require('../models/account'); 
- 
 router.get('/', function (req, res) { 
     res.render('index', { title: 'Player App', user : req.user }); 
 }); 
@@ -43,6 +42,8 @@ router.get('/login', function(req, res) {
 }); 
  
 router.post('/login', passport.authenticate('local'), function(req, res) { 
+  if(req.session.returnTo) 
+    res.redirect(req.session.returnTo); 
     res.redirect('/'); 
 }); 
  
